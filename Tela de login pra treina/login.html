@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Login</title>
+    <style>
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(45deg, purple, cyan);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-box {
+            background-color: rgba(0, 0, 0, 0.7);
+            position: relative;
+            padding: 70px;
+            border-radius: 13px;
+            color: white;
+            box-shadow: 30px 27px 25px rgba(0, 0, 0, 0.5);
+            animation-name: animaDiv;
+            animation-duration: 10s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            width: 420px;
+            max-width: 90%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            position: relative;
+            top:-18px;
+            font-size: 40px;
+
+            text-shadow: 3px 3px 5px #cfcfcf2c;
+        }
+
+        .input-box input {
+            padding: 15px;
+            border-radius: 10px;
+            outline: none;
+            font-size: 15px;
+            border: 2px solid #dbdada;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            box-sizing: border-box;
+            width: 100%;  
+            background: #fff;
+            color: #222;
+        }
+
+        @keyframes brilho-pulsante {
+            0% { box-shadow: 0 0 5px rgba(219, 218, 218, 0.2); }
+            50% { box-shadow: 0 0 15px 2px rgba(220, 218, 218, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(219, 218, 218, 0.2); }
+        }
+        .input-box input:focus {
+            animation-name: brilho-pulsante;
+            animation-duration: 2.5s;
+            animation-timing-function: ease-in-out;
+            animation-direction: alternate;
+            animation-iteration-count: infinite;
+        }
+
+
+        button {
+            background-color: dodgerblue;
+            border: none;
+            padding: 17px;
+            width: 100%;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        @keyframes animaDiv {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-4px) scale(1.02);
+            }
+            100% { 
+                transform: translateY(0) scale(1);
+            }
+        }
+        @keyframes animacao {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.02); }
+        }
+        button:hover {
+            animation-name: animacao;
+            animation-duration: 0.7s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            background-color: rgba(4, 120, 235, 1);
+        }
+
+        a {
+            display: block;
+            margin-top: 15px;
+            font-size: 13px;
+            text-align: center;
+            text-decoration: none;
+            color: rgba(30, 143, 255, 0.9);
+            transition: 0.3s;
+            text-shadow: 3px 4px 4px rgb(2, 39, 77);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        a:hover { text-decoration: underline; }
+
+        .input-box {
+            position: relative;
+            margin: 10px 0 20px 0;
+            width: 100%;
+        }
+
+        .input-box i {
+            position: absolute;
+            right: 12px; 
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #6b7280; 
+            pointer-events: none;
+            z-index: 2;
+        }
+
+
+        .input-box input {
+            padding-right: 46px;
+        }
+        .login-box .note {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 13px;
+            color: rgba(30, 143, 255, 0.7);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>Login</h1>
+
+        <form>
+            <div class="input-box">
+                <input id="email" type="email" placeholder="Email" required>
+                <i class="bi bi-envelope"></i>
+            </div>
+
+            <div class="input-box">
+                <input id="senha" type="password" placeholder="Senha" required>
+                <i class="bi bi-lock-fill"></i>
+            </div>
+
+            <button type="submit">Entrar</button>
+
+            <div class="note">
+                <a href="cadastro.html" onclick="transicionarPagina(event, 'cadastro.html')">Ainda não possui cadastro?</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
