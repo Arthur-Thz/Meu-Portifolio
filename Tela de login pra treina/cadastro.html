@@ -166,6 +166,16 @@
         pointer-events: none;
     }
 
+    .input-box-senha i-eye{
+        position: absolute;
+        right:34px;
+        top:50%;
+        transform: translateY(-50%);
+        font-size:20px;
+        color:#6b7280d8;
+        cursor: pointer;
+    }
+
     .input-box i {
         position: absolute;
         right:4px;
@@ -211,6 +221,7 @@
 
             <div class = "input-box-senha">
                 <input type = "password" placeholder="Senha" id= "Senha" required>
+                <i-eye class = "bi bi-eye-slash" id = "togglePassword" style = "display: none;"></i-eye>
                 <i class = "bi bi-lock-fill"></i>
             </div>
     
@@ -242,6 +253,39 @@
                 return true;
             }
         }
+
+        const togglePassword = document.getElementById("togglePassword");
+        const password = document.getElementById("Senha");
+        const confirmapassword = document.getElementById("ConfirmaSenha");
+
+        password.addEventListener("input", function() {
+        if (password.value.length > 0){
+            togglePassword.style.display = "block"
+        } else {
+            togglePassword.style.display = "none"
+        }
+    });
+
+        togglePassword.addEventListener("click", function() {
+            const type = password.type === "password" ? "text" : "password";
+            password.type = type;
+
+            this.classList.toggle("bi-eye");
+        });
+
+        password.addEventListener("keypress", function(event){
+            if (event.key === "  " || event.keyCode === 32) {
+                event.preventDefault();
+            }
+        });
+
+        confirmapassword.addEventListener("keypress", function(event){
+            if (event.key === "  " || event.keyCode === 32) {
+                event.preventDefault();
+            }
+        });
+    
+        
     </script>
     </div>
     

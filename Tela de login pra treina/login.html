@@ -140,6 +140,17 @@
         .input-box input {
             padding-right: 34px;
         }
+
+        .input-box i-eye {
+            position: absolute;
+            right:38px;
+            top:50%;
+            transform: translateY(-50%);
+            font-size:20px;
+            color:#6b7280d8;
+            cursor: pointer;
+        }   
+
         .login-box .note {
             text-align: center;
             margin-top: 12px;
@@ -160,7 +171,8 @@
             </div>
 
             <div class="input-box">
-                <input id="senha" type="password" placeholder="Senha" required>
+                <input type="password" placeholder="Senha" id ="Senha" required>
+                <i-eye class ="bi bi-eye-slash" id = "togglePassword" style = "display: none;"></i-eye>
                 <i class="bi bi-lock-fill"></i>
             </div>
 
@@ -170,6 +182,31 @@
                 <a href="cadastro.html" onclick="transicionarPagina(event, 'cadastro.html')">Ainda não possui cadastro?</a>
             </div>
         </form>
+        <script>
+            const togglePassword = document.getElementById("togglePassword");
+            const password = document.getElementById("Senha");
+
+        password.addEventListener("input", function() {
+        if (password.value.length > 0){
+            togglePassword.style.display = "block"
+        } else {
+            togglePassword.style.display = "none"
+        }
+    });
+
+        togglePassword.addEventListener("click", function() {
+            const type = password.type === "password" ? "text" : "password";
+            password.type = type;
+
+            this.classList.toggle("bi-eye");
+        });
+
+        password.addEventListener("keypress", function(event){
+            if (event.key === "  " || event.keyCode === 32) {
+                event.preventDefault();
+            }
+        });
+        </script>
     </div>
 </body>
 </html>
