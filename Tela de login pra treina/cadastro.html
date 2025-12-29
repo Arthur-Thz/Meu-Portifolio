@@ -140,6 +140,32 @@
         box-sizing: border-box;
     }
 
+    .input-box-senha {
+        position: relative;
+        width: 100%;
+    }
+
+    .input-box-senha input{
+        width: 103%;
+        padding: 15px;
+        padding-right: 40px;
+        border-radius: 10px;
+        outline: none;
+        font-size: 15px;
+        border: 2px solid rgb(219, 218, 218);
+        box-sizing: border-box;
+    }
+
+    .input-box-senha i{
+        position: absolute;
+        right:4px;
+        top:50%;
+        transform: translateY(-50%);
+        font-size:20px;
+        color:#aaa;
+        pointer-events: none;
+    }
+
     .input-box i {
         position: absolute;
         right:4px;
@@ -157,7 +183,7 @@
         <h1 class = "titulo-cadastre-se">Cadastre-se!</h1>
         <form onsubmit="return validarSenhas(event)">
             <div class = "input-box">
-                <input type = "text" placeholder="Nome e Sobrenome">
+                <input type = "text" placeholder="Nome e Sobrenome" required>
                 <i class = "bi bi-person-fill"></i>
             </div>
 
@@ -183,14 +209,14 @@
 
             <br>
 
-            <div class = "input-box">
+            <div class = "input-box-senha">
                 <input type = "password" placeholder="Senha" id= "Senha" required>
                 <i class = "bi bi-lock-fill"></i>
             </div>
     
             <br>
 
-            <div class = "input-box">
+            <div class = "input-box-senha">
                 <input type = "password" placeholder="Confirme a Senha" id = "ConfirmaSenha" required>
                 <i class = "bi bi-person-fill-lock"></i>
             </div>
