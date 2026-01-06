@@ -60,77 +60,35 @@
     </div>
 </div>
 
-    <section class="feedback">
-    <div class="feedback-card">
-        <h2>Fale comigo</h2>
-        <p>Tem alguma Sugestão, Dúvida ou Quer entrar em contato?</p>
+        <section class="feedback">
+        <div class="feedback-card">
+            <h2>Fale comigo</h2>
+            <p>Tem alguma Sugestão, Dúvida ou Quer entrar em contato?</p>
 
-        <form action="https://formsubmit.co/henriquepereira04pp@gmail.com" method="POST">
-            <input type="text" name="nome" placeholder="Seu Nome" required>
-            <input type="email" name="email" id="email" placeholder="Seu Email" required>
-            <p class = "erro-msg" id="erroEmail">Preencha o Email</p>
+            <form action="https://formsubmit.co/henriquepereira04pp@gmail.com" method="POST">
+                <input type="text" name="nome" placeholder="Seu Nome" required>
+                
+                <input type="email" name="email" id="email" placeholder="Seu Email" required>
+                <span id ="erroEmail"></span>
 
-            <textarea name="mensagem" id="mensagem" placeholder="Escreva sua Mensagem" required></textarea>
-            <p class ="erro-msg" id="erro-mensagem">Escreva Sua mensagem</p>
+                <textarea name="mensagem" id="mensagem" placeholder="Escreva sua Mensagem" required></textarea>
+                <span id="erro-mensagem"></span>
 
-            <button id="btnEnviar" type="submit">
-                <i class="fa-solid fa-paper-plane"></i>
-                Enviar
-            </button>
+                <button id="btnEnviar" type="submit">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Enviar
+                </button>
             
-        </form>
-    </div>
-    <div id="toast" class="toast">
+            </form>
+        </div>
+            <div id="toast-sucesso" class="toast toast-sucesso">
                 Obrigado pela mensagem!
             </div>
-</section>
-    <script>
-    const btn = document.getElementById("btnEnviar");
-    const toast = document.getElementById("toast");
 
-    const form = document.querySelector("form");
-    const email = document.getElementById("email");
-    const mensagem = document.getElementById("mensagem");
-    const erroEmail = document.getElementById("erroEmail");
-    const erroMensagem = document.getElementById("erro-mensagem");
-
-    email.addEventListener("keydown", function (event) {
-        if (event.key === " ") {
-            event.preventDefault();
-        }
-    });
-
-    btn.addEventListener("click", function (event) {
-
-        let valido = true;
-
-        email.classList.remove("erro");
-        mensagem.classList.remove("erro");
-        erroEmail.style.display = "none";
-        erroMensagem.style.display = "none";
-
-        if (email.value.trim() === "") {
-            email.classList.add("erro");
-            valido = false;
-        }
-
-        if (mensagem.value.trim() === "") {
-            mensagem.classList.add("erro");
-            valido = false;
-        }
-
-        if (!valido) return;
-
-        toast.classList.add("show");
-
-        setTimeout(() => {
-            toast.classList.remove("show");
-        }, 2500);
-
-        setTimeout(() => {
-            form.reset();
-        }, 100);
-    });
-
-    </script>
+            <div id="toast-erro" class="toast toast-erro">
+                Erro, Por favor Verifique os Campos.
+            </div> 
+    </section>
+    <script src = "javascript.js"></script> 
 </body>
+</html>
