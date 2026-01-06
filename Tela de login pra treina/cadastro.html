@@ -6,6 +6,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <title>Cadastro</title>
     <style>
+
         body {
             margin: 0;
             padding: 0;
@@ -124,9 +125,21 @@
 
         }
 
-        .input-box {
-    position: relative;
-    width: 100%;
+        input::-webkit-reveal,
+        input::-webkit-clear-button {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        input::-ms-reveal,
+        input::-ms-clear {
+            display:none;
+        }
+
+    .input-box {
+        position: relative;
+        width: 100%;
     }
 
     .input-box input {
@@ -175,6 +188,19 @@
         color:#6b7280d8;
         cursor: pointer;
     }
+    .input-box-senha i-eye2{
+        position: absolute;
+        right:34px;
+        top:50%;
+        transform: translateY(-50%);
+        font-size:20px;
+        color:black;
+        display: none;
+    }
+
+    .input-box-senha input:focus + i-eye2 {
+        display: block !important;
+    }
 
     .input-box i {
         position: absolute;
@@ -213,7 +239,7 @@
             <br>
             
             <div class = "input-box">
-                <input type = "email" placeholder="Email" required>
+                <input type = "email" id="email" placeholder="Email" required>
                 <i class = "bi bi-envelope-fill"></i>
             </div>
 
@@ -229,6 +255,7 @@
 
             <div class = "input-box-senha">
                 <input type = "password" placeholder="Confirme a Senha" id = "ConfirmaSenha" required>
+                <i-eye2 class = "bi bi-eye-slash"></i-eye2> 
                 <i class = "bi bi-person-fill-lock"></i>
             </div>
 
@@ -237,57 +264,8 @@
             <button>Cadastrar</button>
         </form>
         <a href = "login.html">Já tem uma Conta? Clique Aqui</a>
-        <script>
-        function validarSenhas(event) {
-            var senha = document.getElementById("Senha").value;
-            var confirma_senha = document.getElementById("ConfirmaSenha").value;
-
-            if(senha!==confirma_senha) {
-                alert("As Senhas digitadas não coincidem. Por favor, Verifique.")
-
-                event.preventDefault();
-
-                document.getElementById("ConfirmaSenha").value = " ";
-                return false;
-            } else {
-                return true;
-            }
-        }
-
-        const togglePassword = document.getElementById("togglePassword");
-        const password = document.getElementById("Senha");
-        const confirmapassword = document.getElementById("ConfirmaSenha");
-
-        password.addEventListener("input", function() {
-        if (password.value.length > 0){
-            togglePassword.style.display = "block"
-        } else {
-            togglePassword.style.display = "none"
-        }
-    });
-
-        togglePassword.addEventListener("click", function() {
-            const type = password.type === "password" ? "text" : "password";
-            password.type = type;
-
-            this.classList.toggle("bi-eye");
-        });
-
-        password.addEventListener("keypress", function(event){
-            if (event.key === "  " || event.keyCode === 32) {
-                event.preventDefault();
-            }
-        });
-
-        confirmapassword.addEventListener("keypress", function(event){
-            if (event.key === "  " || event.keyCode === 32) {
-                event.preventDefault();
-            }
-        });
-    
-        
-    </script>
     </div>
+    <script src="JSdocadastro.js"></script>
     
 </body>
 </html>

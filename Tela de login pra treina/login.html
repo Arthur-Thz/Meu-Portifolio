@@ -79,7 +79,6 @@
             color: white;
             cursor: pointer;
             font-size: 15px;
-            margin-top: 10px;
             box-sizing: border-box;
         }
         @keyframes animaDiv {
@@ -118,6 +117,19 @@
             font-family: Arial, Helvetica, sans-serif;
         }
         a:hover { text-decoration: underline; }
+
+
+        input::-webkit-reveal,
+        input::-webkit-clear-button {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        input::-ms-reveal,
+        input::-ms-clear {
+            display:none;
+        }
 
         .input-box {
             position: relative;
@@ -179,34 +191,11 @@
             <button type="submit">Entrar</button>
 
             <div class="note">
-                <a href="cadastro.html" onclick="transicionarPagina(event, 'cadastro.html')">Ainda não possui cadastro?</a>
+                <a href="cadastro.html">Ainda não possui cadastro?</a>
             </div>
         </form>
-        <script>
-            const togglePassword = document.getElementById("togglePassword");
-            const password = document.getElementById("Senha");
-
-        password.addEventListener("input", function() {
-        if (password.value.length > 0){
-            togglePassword.style.display = "block"
-        } else {
-            togglePassword.style.display = "none"
-        }
-    });
-
-        togglePassword.addEventListener("click", function() {
-            const type = password.type === "password" ? "text" : "password";
-            password.type = type;
-
-            this.classList.toggle("bi-eye");
-        });
-
-        password.addEventListener("keypress", function(event){
-            if (event.key === "  " || event.keyCode === 32) {
-                event.preventDefault();
-            }
-        });
-        </script>
+        
+        <script src="JSdologin.js"></script>
     </div>
 </body>
 </html>
