@@ -7,6 +7,7 @@
 
 body {
     color: white;
+    overflow-x: hidden;
 }
 .background {
     background:
@@ -30,7 +31,7 @@ header h1 {
 }
 
 header h1:hover {
-    transform: translateY(-7px);
+    transform: scale(1.07);
     text-shadow: 0 0 20px rgba(46, 204, 112, 0.4);
     cursor: default;
 }

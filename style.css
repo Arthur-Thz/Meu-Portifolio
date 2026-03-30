@@ -177,8 +177,12 @@ button:hover {
     backdrop-filter: blur(12px);
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
     text-align: center;
+    transition: 0.3s ease;
 }
 
+.feedback-card:hover{
+    transform: scale(1.02);
+}
 .feedback-card h2 {
     color: #fff;
     margin-bottom: 15px;
