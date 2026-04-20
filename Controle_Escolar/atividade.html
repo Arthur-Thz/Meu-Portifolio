@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade PAM</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /*horizontal*/
+            padding-top: 120px;
+            align-items: center; /* vertical */
+            background: linear-gradient(160deg, #020617, #0f182c);
+            overflow-x: hidden;
+        }
+
+        .titulo {
+            color: white;
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+
+            background: #1e293b;
+            padding: 12vh;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(3, 204, 104, 0.2);
+            margin-top: 20px;
+        }
+
+        input{
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 3px;
+            border-radius: 7px;
+            border: none;
+            background: #0f172a;
+            color: #ffff;
+        }
+
+        button{
+            padding: 12px;
+            font-size: 14px;
+            margin-top: 10px;
+            border-radius: 7px;
+            border: none;
+            background-color: #38bdf8;
+            color: #020617;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 5px #38bdf8;
+        }
+
+        button:hover{
+            cursor:pointer;
+            transform:scale(1.04);
+            box-shadow: 0 0 5px #38bdf8;
+        }
+
+        .aluno {
+            background: #0f172a;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            width: 200px;
+        }
+
+        .aluno .nome {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        #lista {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        #detalhes {
+            position: absolute;
+            right: 80px;
+            top: 100px;
+
+            width: 250px;
+
+            display: none;
+            margin-top: 20px;
+            color: white;
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 0 10px rgb(0, 166, 243);
+        }   
+
+        #lista, #estatisticas {
+            max-width: 800px;
+        }
+
+        #estatisticas {
+            display: none;
+            position: absolute;
+            left: 20px;
+            top: 140px;
+
+            background: #0f172a;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 300px;
+
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <h2 class="titulo"> Controle Escolar </h2>
+
+
+    <div class ="inputs">
+        <input type = "text" id="nome" placeholder="Nome do Aluno" required>
+        <input type ="number" id = "idade" placeholder="Idade do Aluno" required>
+        <input type = "number" id = "nota" placeholder="Nota (0 a 10)" required>
+        <button id="btnCadastrar">Cadastrar</button>
+    </div>
+
+    <div id ="lista"></div>
+
+    <div id = "estatisticas"></div>
+
+    <div id = "detalhes"></div>
+    
+    <script>
+    const alunos = [];
+
+const nomeInput = document.getElementById("nome");
+const idadeInput = document.getElementById("idade");
+const notaInput = document.getElementById("nota");
+const lista = document.getElementById("lista");
+
+document.getElementById("btnCadastrar").addEventListener("click", () => {
+
+    const nome = nomeInput.value.trim();
+    const idade = Number(idadeInput.value);
+    const nota = Number(notaInput.value);
+
+    if (nome === "" || idade <= 0 || idade > 18 || nota < 0 || nota > 10){
+        alert("Preencha corretamente");
+        return;
+    }
+
+    alunos.push({nome, idade, nota});
+
+    nomeInput.value = "";
+    idadeInput.value = "";
+    notaInput.value = "";
+
+    mostrarAlunos();
+});
+
+    function mostrarAlunos(){
+        lista.innerHTML = "";
+
+        alunos.forEach((aluno, index) => {
+            const div = document.createElement("div");
+            div.classList.add("aluno");
+
+            let status;
+            if (aluno.nota > 6) {
+                status = "Aprovado";
+                div.style.borderLeft = "5px solid lightgreen";
+            } else if (aluno.nota === 6) {
+                status = "Recuperação";
+                div.style.borderLeft = "5px solid orange";
+            } else {
+                status = "Reprovado";
+                div.style.borderLeft = "5px solid red";
+            }
+
+            div.innerHTML = `
+                <div class="nome">${aluno.nome}</div>
+                <div>Status: ${status}</div>
+
+                <button onclick="verDetalhes(${index})">Detalhes</button>
+                <button onclick="removerAluno(${index})">Remover</button>
+            `;
+
+            lista.appendChild(div);
+        });
+        atualizarEstatisticas();
+    }
+
+    function removerAluno(index){
+        alunos.splice(index, 1);
+        mostrarAlunos();
+
+        const detalhes = document.getElementById("detalhes");
+        detalhes.innerHTML = "";
+        detalhes.style.display = "none";
+    }
+
+
+    function verDetalhes(index){
+        const aluno = alunos[index];
+        const div = document.getElementById("detalhes");
+
+        let situacao;
+
+        if (aluno.nota > 6) {
+            situacao = "Bom Desempenho";
+        } else if (aluno.nota === 6){
+            situacao = "Recuperação";
+        } else {
+            situacao = "Baixo Desempenho";
+        }
+
+        div.style.display = "block";
+
+        div.innerHTML = `
+            <h3>Detalhes do Aluno</h3>
+            <p>Nome: ${aluno.nome}</p>
+            <p>Idade: ${aluno.idade}</p>
+            <p>Nota: ${aluno.nota}</p>
+            <p>Situação: ${situacao}</p>
+        `;
+    }
+
+    function atualizarEstatisticas(){
+        const div = document.getElementById("estatisticas");
+
+        if (alunos.length === 0){
+            div.style.display = "none";
+            return;
+        }
+
+        div.style.display = "block";
+
+        const total = alunos.length;
+
+        let soma = 0;
+        let aprovados = 0;
+        let reprovados = 0;
+        let recuperacao = 0;
+
+        alunos.forEach(aluno => {
+            soma += aluno.nota;
+
+            if (aluno.nota > 6) {
+                aprovados++;
+            } else if(aluno.nota === 6){
+                recuperacao++;
+            } else {
+                reprovados++;
+            }
+        });
+
+        const media = total > 0 ? (soma / total).toFixed(2) : 0;
+
+        div.innerHTML = `
+            <h3>Estatísticas da Turma</h3>
+            <p>Total de alunos: ${total}</p>
+            <p>Média da turma: ${media}</p>
+            <p>Aprovados: ${aprovados}</p>
+            <p>Em Recuperação: ${recuperacao}</p>
+            <p>Reprovados: ${reprovados}</p>
+        `;
+    }
+    </script>
+</body>
+</html>
